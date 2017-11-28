@@ -25,6 +25,7 @@ services:
 
   cxf:
     image: jax-rs-2.0-cxf-metrics:latest
+    mem_limit: 256MB
     expose:
     - 19090
     ports:

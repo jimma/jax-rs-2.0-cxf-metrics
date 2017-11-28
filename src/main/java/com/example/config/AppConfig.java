@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import com.codahale.metrics.JmxReporter;
 import com.codahale.metrics.MetricRegistry;
 import com.example.rs.PeopleRestService;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
@@ -44,12 +43,7 @@ public class AppConfig {
 	
 	@Bean
 	public PeopleRestService peopleRestService() {
-		return new PeopleRestService();
-	}
-	
-	@Bean(initMethod = "start", destroyMethod = "stop")
-	public JmxReporter jmxReporter() {
-		return JmxReporter.forRegistry(metricRegistry()).build();
+		return new PeopleRestService(metricRegistry());
 	}
 	
 	@Bean

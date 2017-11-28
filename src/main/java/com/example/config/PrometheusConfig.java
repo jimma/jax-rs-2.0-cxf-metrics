@@ -7,24 +7,19 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.exporter.MetricsServlet;
 import io.prometheus.client.spring.boot.SpringBootMetricsCollector;
 
 @Configuration
 public class PrometheusConfig {
+
 	@Bean
-	public CollectorRegistry collectorRegistry() {
-		return new CollectorRegistry();
+	public SpringBootMetricsCollector metricsCollector(final Collection<PublicMetrics> metrics) {
+		return new SpringBootMetricsCollector(metrics).register();
 	}
 
 	@Bean
-	public SpringBootMetricsCollector metricsCollector(final Collection<PublicMetrics> metrics, final CollectorRegistry registry) {
-		return new SpringBootMetricsCollector(metrics).register(registry);
-	}
-
-	@Bean
-	public ServletRegistrationBean exporterServlet(CollectorRegistry registry) {
-		return new ServletRegistrationBean(new MetricsServlet(registry), "/prometheus");
+	public ServletRegistrationBean exporterServlet() {
+		return new ServletRegistrationBean(new MetricsServlet(), "/prometheus");
 	}
 }

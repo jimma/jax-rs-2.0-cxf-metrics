@@ -1,0 +1,19 @@
+server:
+  port: 19090
+
+endpoints:
+  jmx:
+    enabled: true
+    unique-names: true
+
+management:
+  security:
+    enabled: true 
+
+security:
+  ignored:
+    - /services/**
+  user:
+    name: guest
+    password: guest
+    
