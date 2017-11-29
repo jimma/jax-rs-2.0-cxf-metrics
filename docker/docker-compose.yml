@@ -27,8 +27,10 @@ services:
     image: jax-rs-2.0-cxf-metrics:latest
     expose:
     - 19090
+    - 9323
     ports:
       - 19090:19090
+      - 9323:9323
     networks:
       - cxf-network
       
