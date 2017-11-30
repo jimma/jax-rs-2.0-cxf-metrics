@@ -1,8 +1,8 @@
 package com.example.rs;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,8 +15,6 @@ import com.codahale.metrics.Histogram;
 import com.codahale.metrics.MetricRegistry;
 import com.example.model.Person;
 
-import reactor.core.publisher.Flux;
-
 @Path("/people")
 @Component
 public class PeopleRestService {
@@ -25,17 +23,15 @@ public class PeopleRestService {
 	
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Collection<Person> getPeople() {
-        int delay = random.nextInt(1000);
+    public Collection<Person> getPeople() throws InterruptedException {
+        long delay = random.nextInt(1200);
+        if(delay > 1000) {
+            throw new RuntimeException("Failed to find people");
+        }
         this.hist.update(delay);
-        return Flux
-        	.just(
-        		new Person("a@b.com", "John", "Smith"), 
-        		new Person("c@b.com", "Bob", "Bobinec")
-        	)
-        	.delayMillis(delay)
-        	.toStream()
-        	.collect(Collectors.toList());
+        Thread.sleep(delay);
+        return Arrays.asList(new Person("a@b.com", "John", "Smith"), 
+        		new Person("c@b.com", "Bob", "Bobinec"));
     }
     
     public PeopleRestService(MetricRegistry registry) {
