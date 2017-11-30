@@ -31,14 +31,29 @@
 
 package org.sample;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
+
 import org.openjdk.jmh.annotations.Benchmark;
 
 public class MyBenchmark {
+    
+    private static Client client = ClientBuilder.newBuilder().newClient();
 
     @Benchmark
     public void testMethod() {
-        // This is a demo/sample template for building your JMH benchmarks. Edit as needed.
-        // Put your benchmark code here.
+        WebTarget target = client.target("http://10.8.245.95:19090/services/people"); 
+        try {
+            Invocation.Builder builder = target.request();
+            Response response = builder.get();
+            System.out.println(response.getStatus());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage() + "-----" + e.getClass().getSimpleName());
+        }
     }
 
 }
