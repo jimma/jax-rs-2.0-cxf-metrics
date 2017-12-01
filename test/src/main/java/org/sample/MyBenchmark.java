@@ -35,17 +35,41 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.cxf.tracing.opentracing.jaxrs.OpenTracingClientProvider;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
+
+import com.uber.jaeger.Configuration;
+import com.uber.jaeger.samplers.ConstSampler;
+import com.uber.jaeger.senders.HttpSender;
+
+import io.opentracing.Tracer;
 
 public class MyBenchmark {
-    
-    private static Client client = ClientBuilder.newBuilder().newClient();
 
+    private static final Tracer tracer = new Configuration("jaxrs-client",
+            new Configuration.SamplerConfiguration(ConstSampler.TYPE, 1),
+            new Configuration.ReporterConfiguration(new HttpSender("http://localhost:14268/api/traces")) 
+        ).getTracer();
+                     
+    private static final OpenTracingClientProvider provider = new OpenTracingClientProvider(tracer);
+    private static final Client client = ClientBuilder.newClient().register(provider);
+         
+    private static final Response response = client
+      .target("http://localhost:9000/catalog")
+      .request()
+      .accept(MediaType.APPLICATION_JSON)
+      .get();
+    
     @Benchmark
     public void testMethod() {
-        WebTarget target = client.target("http://10.8.245.95:19090/services/people"); 
+        WebTarget target = client.target("http://10.8.245.95:19090/services/people");
         try {
             Invocation.Builder builder = target.request();
             Response response = builder.get();
@@ -54,6 +78,16 @@ public class MyBenchmark {
             e.printStackTrace();
             System.out.println(e.getMessage() + "-----" + e.getClass().getSimpleName());
         }
+    }
+
+    public static void main(String[] args) throws RunnerException {
+        Options opt = new OptionsBuilder()
+                .include(MyBenchmark.class.getSimpleName())
+                .warmupIterations(5)
+                .measurementIterations(15)
+                .forks(2)
+                .build();
+        new Runner(opt).run();
     }
 
 }

@@ -61,6 +61,21 @@
 			<artifactId>cxf-core</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.uber.jaeger</groupId>
+			<artifactId>jaeger-core</artifactId>
+			<version>0.22.0-RC2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.uber.jaeger</groupId>
+			<artifactId>jaeger-jaxrs2</artifactId>
+			<version>0.22.0-RC2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-integration-tracing-opentracing</artifactId>
+			<version>3.2.1</version>
+		</dependency>
 	</dependencies>
 
 	<properties>
@@ -107,7 +122,7 @@
 							<transformers>
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>org.openjdk.jmh.Main</mainClass>
+									<mainClass>org.sample.MyBenchmark</mainClass>
 								</transformer>
 
 								<transformer
