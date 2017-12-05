@@ -1,5 +1,6 @@
 package com.example.config;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.apache.cxf.Bus;
@@ -27,31 +28,24 @@ import io.opentracing.Tracer;
 public class AppConfig {
     @Bean(destroyMethod = "destroy")
     public Server jaxRsServer(final Bus bus) {
+        final Tracer tracer = new com.uber.jaeger.Configuration("tracer-server",
+                new com.uber.jaeger.Configuration.SamplerConfiguration(ConstSampler.TYPE, 1), /* or any other Sampler */
+                new com.uber.jaeger.Configuration.ReporterConfiguration(
+                        new HttpSender("http://localhost:19090/api/traces")) /* or any other Sender */
+        ).getTracer();
+        
         final JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
 
         factory.setServiceBean(peopleRestService());
-        factory.setProvider(new JacksonJsonProvider());
+        factory.setProviders(Arrays.asList(new JacksonJsonProvider(), new OpenTracingFeature(tracer)));
         factory.setBus(bus);
         factory.setAddress("/");
         factory.setFeatures(Collections.singletonList(new MetricsFeature(new CodahaleMetricsProvider(bus))));
         factory.setProperties(Collections.singletonMap("org.apache.cxf.management.service.counter.name", "cxf-services."));
-
+        
         return factory.create();
     }
 
-    @Bean(destroyMethod = "destroy")
-    public Server getServerFactoryBean(final Bus bus) {
-        final Tracer tracer = new com.uber.jaeger.Configuration("tracer-server",
-                new com.uber.jaeger.Configuration.SamplerConfiguration(ConstSampler.TYPE, 1), /* or any other Sampler */
-                new com.uber.jaeger.Configuration.ReporterConfiguration(
-                        new HttpSender("http://localhost:14268/api/traces")) /* or any other Sender */
-        ).getTracer();
-
-        final JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
-        factory.setProvider(new OpenTracingFeature(tracer));
-
-        return factory.create();
-    }
 
     @Bean
     public PeopleRestService peopleRestService() {
