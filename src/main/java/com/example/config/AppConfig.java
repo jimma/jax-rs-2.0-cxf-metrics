@@ -17,8 +17,6 @@ import org.springframework.context.annotation.Import;
 import com.codahale.metrics.MetricRegistry;
 import com.example.rs.PeopleRestService;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import com.uber.jaeger.samplers.ConstSampler;
-import com.uber.jaeger.senders.HttpSender;
 
 import io.opentracing.Tracer;
 
@@ -28,11 +26,7 @@ import io.opentracing.Tracer;
 public class AppConfig {
     @Bean(destroyMethod = "destroy")
     public Server jaxRsServer(final Bus bus) {
-        final Tracer tracer = new com.uber.jaeger.Configuration("tracer-server",
-                new com.uber.jaeger.Configuration.SamplerConfiguration(ConstSampler.TYPE, 1), /* or any other Sampler */
-                new com.uber.jaeger.Configuration.ReporterConfiguration(
-                        new HttpSender("http://localhost:19090/api/traces")) /* or any other Sender */
-        ).getTracer();
+        final Tracer tracer = new com.uber.jaeger.Configuration("tracer-server",null, null).getTracer();
         
         final JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
 
