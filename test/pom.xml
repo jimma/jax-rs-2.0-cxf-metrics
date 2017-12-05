@@ -58,7 +58,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-core</artifactId>
+			<artifactId>cxf-integration-tracing-opentracing</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
 		<dependency>
@@ -67,14 +67,9 @@
 			<version>0.22.0-RC2</version>
 		</dependency>
 		<dependency>
-			<groupId>com.uber.jaeger</groupId>
-			<artifactId>jaeger-jaxrs2</artifactId>
-			<version>0.22.0-RC2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-integration-tracing-opentracing</artifactId>
-			<version>3.2.1</version>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.1</version>
 		</dependency>
 	</dependencies>
 

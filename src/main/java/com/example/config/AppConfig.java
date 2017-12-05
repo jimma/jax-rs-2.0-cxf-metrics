@@ -49,8 +49,6 @@ public class AppConfig {
 
         final JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
         factory.setProvider(new OpenTracingFeature(tracer));
-        factory.setBus(bus);
-        factory.setAddress("/");
 
         return factory.create();
     }

@@ -60,12 +60,6 @@ public class MyBenchmark {
                      
     private static final OpenTracingClientProvider provider = new OpenTracingClientProvider(tracer);
     private static final Client client = ClientBuilder.newClient().register(provider);
-         
-    private static final Response response = client
-      .target("http://localhost:9000/catalog")
-      .request()
-      .accept(MediaType.APPLICATION_JSON)
-      .get();
     
     @Benchmark
     public void testMethod() {
