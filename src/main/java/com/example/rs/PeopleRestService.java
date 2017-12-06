@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Random;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -15,7 +14,6 @@ import com.codahale.metrics.Histogram;
 import com.codahale.metrics.MetricRegistry;
 import com.example.model.Person;
 
-@Path("/people")
 @Component
 public class PeopleRestService {
 	private final Random random = new Random();

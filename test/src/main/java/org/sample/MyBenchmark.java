@@ -45,19 +45,24 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 import com.uber.jaeger.Configuration;
+import com.uber.jaeger.Configuration.ReporterConfiguration;
+import com.uber.jaeger.Configuration.SamplerConfiguration;
+import com.uber.jaeger.samplers.ConstSampler;
+import com.uber.jaeger.senders.HttpSender;
 
 import io.opentracing.Tracer;
 
 public class MyBenchmark {
 
-    private static final Tracer tracer = new Configuration("jaxrs-client",null, null).getTracer();
+    private static final Tracer tracer = new Configuration("jaxrs-client", new SamplerConfiguration(ConstSampler.TYPE, 1), /* or any other Sampler */
+            new ReporterConfiguration(new HttpSender("http://localhost:14268/api/traces"))).getTracer();
                      
     private static final OpenTracingClientProvider provider = new OpenTracingClientProvider(tracer);
     private static final Client client = ClientBuilder.newClient().register(provider);
     
     @Benchmark
     public void testMethod() {
-        WebTarget target = client.target("http://10.8.245.95:19090/services/people");
+        WebTarget target = client.target("http://10.8.245.95:19090/services");
         try {
             Invocation.Builder builder = target.request();
             Response response = builder.get();
