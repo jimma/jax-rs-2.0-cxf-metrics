@@ -16,28 +16,25 @@ import org.springframework.context.annotation.Import;
 import com.codahale.metrics.MetricRegistry;
 import com.example.rs.PeopleRestService;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import com.uber.jaeger.Configuration.ReporterConfiguration;
-import com.uber.jaeger.Configuration.SamplerConfiguration;
 import com.uber.jaeger.samplers.ConstSampler;
+import com.uber.jaeger.samplers.ProbabilisticSampler;
 import com.uber.jaeger.senders.HttpSender;
 
-import io.opentracing.Tracer;
+import io.opentracing.contrib.metrics.prometheus.PrometheusMetricsReporter;
 
 @Configuration
 @EnableAutoConfiguration
 @Import(PrometheusConfig.class)
 public class AppConfig {
+
     @Bean(destroyMethod = "destroy")
     public Server jaxRsServer(final Bus bus) {
-        final Tracer tracer = new com.uber.jaeger.Configuration("tracer-server",
-                new SamplerConfiguration(ConstSampler.TYPE, 1), /* or any other Sampler */
-                new ReporterConfiguration(new HttpSender("http://localhost:14268/api/traces"))).getTracer();
         
         final JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
 
         factory.setServiceBean(peopleRestService());
         factory.setProvider(new JacksonJsonProvider());
-        factory.setProvider(new OpenTracingFeature(tracer));
+        factory.setProvider(new OpenTracingFeature(tracer()));
         factory.setBus(bus);
         factory.setAddress("/");
         factory.setFeatures(Collections.singletonList(new MetricsFeature(new CodahaleMetricsProvider(bus))));
@@ -45,7 +42,6 @@ public class AppConfig {
         
         return factory.create();
     }
-
 
     @Bean
     public PeopleRestService peopleRestService() {
@@ -56,4 +52,25 @@ public class AppConfig {
     public MetricRegistry metricRegistry() {
         return new MetricRegistry();
     }
+
+//    @Bean
+//    private static io.opentracing.Tracer tracer() {
+//        return new com.uber.jaeger.Configuration("tracer-server",
+//                new SamplerConfiguration(ConstSampler.TYPE, 1), /* or any other Sampler */
+//                new ReporterConfiguration(new HttpSender("http://localhost:14268/api/traces"))).getTracer();
+//    }
+    
+
+    @Bean
+    public io.opentracing.Tracer tracer() {
+//        return io.opentracing.contrib.metrics.Metrics.decorate(
+//            io.opentracing.contrib.tracerresolver.TracerResolver.resolveTracer(),
+//            PrometheusMetricsReporter.newMetricsReporter()
+//                .withBaggageLabel("transaction","n/a")
+//                .build());
+        return new com.uber.jaeger.Configuration("jaxer-server", new com.uber.jaeger.Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
+                new com.uber.jaeger.Configuration.ReporterConfiguration())
+                .getTracer();
+    }
+    
 }

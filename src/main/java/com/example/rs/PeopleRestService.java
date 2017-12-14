@@ -14,8 +14,10 @@ import com.codahale.metrics.Histogram;
 import com.codahale.metrics.MetricRegistry;
 import com.example.model.Person;
 
+
 @Component
 public class PeopleRestService {
+
 	private final Random random = new Random();
 	private Histogram hist;
 	
