@@ -16,11 +16,7 @@ import org.springframework.context.annotation.Import;
 import com.codahale.metrics.MetricRegistry;
 import com.example.rs.PeopleRestService;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import com.uber.jaeger.samplers.ConstSampler;
 import com.uber.jaeger.samplers.ProbabilisticSampler;
-import com.uber.jaeger.senders.HttpSender;
-
-import io.opentracing.contrib.metrics.prometheus.PrometheusMetricsReporter;
 
 @Configuration
 @EnableAutoConfiguration
@@ -53,22 +49,14 @@ public class AppConfig {
         return new MetricRegistry();
     }
 
-//    @Bean
-//    private static io.opentracing.Tracer tracer() {
-//        return new com.uber.jaeger.Configuration("tracer-server",
-//                new SamplerConfiguration(ConstSampler.TYPE, 1), /* or any other Sampler */
-//                new ReporterConfiguration(new HttpSender("http://localhost:14268/api/traces"))).getTracer();
-//    }
-    
-
     @Bean
     public io.opentracing.Tracer tracer() {
 //        return io.opentracing.contrib.metrics.Metrics.decorate(
-//            io.opentracing.contrib.tracerresolver.TracerResolver.resolveTracer(),
-//            PrometheusMetricsReporter.newMetricsReporter()
-//                .withBaggageLabel("transaction","n/a")
-//                .build());
-        return new com.uber.jaeger.Configuration("jaxer-server", new com.uber.jaeger.Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
+//                new com.uber.jaeger.Configuration("jaxrs-server",
+//                        new com.uber.jaeger.Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
+//                        new com.uber.jaeger.Configuration.ReporterConfiguration()).getTracer(),
+//                PrometheusMetricsReporter.newMetricsReporter().build());
+        return new com.uber.jaeger.Configuration("jaxrs-server", new com.uber.jaeger.Configuration.SamplerConfiguration(ProbabilisticSampler.TYPE, 1),
                 new com.uber.jaeger.Configuration.ReporterConfiguration())
                 .getTracer();
     }
