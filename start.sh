@@ -1,3 +1,4 @@
+mvn package
 cd docker
 docker-compose up&
 sleep 5
