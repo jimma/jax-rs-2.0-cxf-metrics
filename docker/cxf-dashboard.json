@@ -1,287 +1,903 @@
 {
-	"dashboard": {
-		"__inputs": [
-			{
-				"name": "prometheus",
-				"label": "Prometheus",
-				"description": "",
-				"type": "datasource",
-				"pluginId": "prometheus",
-				"pluginName": "Prometheus"
-			}
-		],
-		"__requires": [
-			{
-				"type": "panel",
-				"id": "graph",
-				"name": "Graph",
-				"version": ""
-			},
-			{
-				"type": "grafana",
-				"id": "grafana",
-				"name": "Grafana",
-				"version": "3.1.1"
-			},
-			{
-				"type": "datasource",
-				"id": "prometheus",
-				"name": "Prometheus",
-				"version": "1.0.0"
-			}
-		],
-		"id": null,
-		"title": "CXF Services",
-		"tags": [],
-		"style": "dark",
-		"timezone": "browser",
-		"editable": true,
-		"hideControls": false,
-		"sharedCrosshair": false,
-		"rows": [
-			{
-				"collapse": false,
-				"editable": true,
-				"height": "250px",
-				"panels": [
-					{
-						"aliasColors": {
-							
-						},
-						"bars": false,
-						"datasource": "prometheus",
-						"editable": true,
-						"error": false,
-						"fill": 1,
-						"grid": {
-							"threshold1": null,
-							"threshold1Color": "rgba(216, 200, 27, 0.27)",
-							"threshold2": null,
-							"threshold2Color": "rgba(234, 112, 112, 0.22)"
-						},
-						"id": 1,
-						"isNew": true,
-						"legend": {
-							"avg": false,
-							"current": false,
-							"max": false,
-							"min": false,
-							"show": true,
-							"total": false,
-							"values": false
-						},
-						"lines": true,
-						"linewidth": 2,
-						"links": [],
-						"nullPointMode": "connected",
-						"percentage": false,
-						"pointradius": 5,
-						"points": false,
-						"renderer": "flot",
-						"seriesOverrides": [],
-						"span": 6,
-						"stack": false,
-						"steppedLine": false,
-						"targets": [
-							{
-								"expr": "cxf_services_Attribute_Totals_oneMinuteRate",
-								"interval": "1m",
-								"intervalFactor": 2,
-								"legendFormat": "",
-								"metric": "cxf_services_Attribute_Totals_oneMinuteRate",
-								"refId": "A",
-								"step": 120
-							},
-							{
-								"expr": "cxf_services_Attribute_Totals_fiveMinuteRate",
-								"intervalFactor": 2,
-								"refId": "B",
-								"metric": "cxf_services_Attribute_Totals_fiveMinuteRate",
-								"step": 4
-							},
-							{
-								"expr": "cxf_services_Attribute_Totals_fifteenMinuteRate",
-								"intervalFactor": 2,
-								"refId": "C",
-								"metric": "cxf_services_Attribute_Totals_fifteenMinuteRate",
-								"step": 4
-							}
-						],
-						"timeFrom": null,
-						"timeShift": null,
-						"title": "Requests / 1, 5, 15 Minutes",
-						"tooltip": {
-							"msResolution": false,
-							"shared": true,
-							"sort": 0,
-							"value_type": "cumulative"
-						},
-						"type": "graph",
-						"xaxis": {
-							"show": true
-						},
-						"yaxes": [
-							{
-								"format": "short",
-								"label": null,
-								"logBase": 1,
-								"max": null,
-								"min": null,
-								"show": true
-							},
-							{
-								"format": "short",
-								"label": null,
-								"logBase": 1,
-								"max": null,
-								"min": null,
-								"show": true
-							}
-						]
-					},
-					{
-						"aliasColors": {
-							
-						},
-						"bars": false,
-						"datasource": "prometheus",
-						"editable": true,
-						"error": false,
-						"fill": 1,
-						"grid": {
-							"threshold1": null,
-							"threshold1Color": "rgba(216, 200, 27, 0.27)",
-							"threshold2": null,
-							"threshold2Color": "rgba(234, 112, 112, 0.22)"
-						},
-						"id": 2,
-						"isNew": true,
-						"legend": {
-							"avg": false,
-							"current": false,
-							"max": false,
-							"min": false,
-							"show": true,
-							"total": false,
-							"values": false
-						},
-						"lines": true,
-						"linewidth": 2,
-						"links": [],
-						"nullPointMode": "connected",
-						"percentage": false,
-						"pointradius": 5,
-						"points": false,
-						"renderer": "flot",
-						"seriesOverrides": [],
-						"span": 6,
-						"stack": false,
-						"steppedLine": false,
-						"targets": [
-							{
-								"expr": "cxf_services_Attribute_Totals_snapshot_999thPercentile",
-								"hide": false,
-								"intervalFactor": 2,
-								"metric": "cxf_services_Attribute_Totals_snapshot_999thPercentile",
-								"refId": "A",
-								"step": 4
-							},
-							{
-								"expr": "cxf_services_Attribute_Totals_snapshot_99thPercentile",
-								"intervalFactor": 2,
-								"metric": "cxf_services_Attribute_Totals_snapshot_99thPercentile",
-								"refId": "B",
-								"step": 4
-							},
-							{
-								"expr": "cxf_services_Attribute_Totals_snapshot_95thPercentile",
-								"intervalFactor": 2,
-								"metric": "cxf_services_Attribute_Totals_snapshot_95thPercentile",
-								"refId": "C",
-								"step": 4
-							}
-						],
-						"timeFrom": null,
-						"timeShift": null,
-						"title": "95 / 99 / 99.9 percentiles",
-						"tooltip": {
-							"msResolution": false,
-							"shared": true,
-							"sort": 0,
-							"value_type": "cumulative"
-						},
-						"type": "graph",
-						"xaxis": {
-							"show": true
-						},
-						"yaxes": [
-							{
-								"format": "ms",
-								"label": null,
-								"logBase": 1,
-								"max": null,
-								"min": null,
-								"show": true
-							},
-							{
-								"format": "short",
-								"label": null,
-								"logBase": 1,
-								"max": null,
-								"min": null,
-								"show": true
-							}
-						]
-					}
-				],
-				"title": "Row"
-			},
-			{
-				"collapse": false,
-				"editable": true,
-				"height": "250px",
-				"panels": [],
-				"title": "New row"
-			}
-		],
-		"time": {
-			"from": "now-30m",
-			"to": "now"
-		},
-		"timepicker": {
-			"refresh_intervals": [
-				"5s",
-				"10s",
-				"30s",
-				"1m",
-				"5m",
-				"15m",
-				"30m",
-				"1h",
-				"2h",
-				"1d"
-			],
-			"time_options": [
-				"5m",
-				"15m",
-				"1h",
-				"6h",
-				"12h",
-				"24h",
-				"2d",
-				"7d",
-				"30d"
-			]
-		},
-		"templating": {
-			"list": []
-		},
-		"annotations": {
-			"list": []
-		},
-		"schemaVersion": 12,
-		"version": 10,
-		"links": [],
-		"gnetId": null
-	}
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.6.2"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "heatmap",
+      "name": "Heatmap",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "hideControls": false,
+  "id": null,
+  "links": [],
+  "refresh": false,
+  "rows": [
+    {
+      "collapse": false,
+      "height": 252,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 3,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 8,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "cxf_services_Attribute_Data_Read_oneMinuteRate",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            },
+            {
+              "expr": "cxf_services_Attribute_Data_Written_oneMinuteRate",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "B"
+            },
+            {
+              "expr": "cxf_services_Attribute_Data_Read_fiveMinuteRate",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "refId": "C"
+            },
+            {
+              "expr": "cxf_services_Attribute_Data_Written_fiveMinuteRate",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "D"
+            },
+            {
+              "expr": "cxf_services_Attribute_Data_Read_fifteenMinuteRate",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "E"
+            },
+            {
+              "expr": "cxf_services_Attribute_Data_Written_fifteenMinuteRate",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "refId": "F"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "data gauge",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "cards": {
+            "cardPadding": null,
+            "cardRound": null
+          },
+          "color": {
+            "cardColor": "#b4ff00",
+            "colorScale": "sqrt",
+            "colorScheme": "interpolateOranges",
+            "exponent": 0.5,
+            "mode": "spectrum"
+          },
+          "dataFormat": "timeseries",
+          "datasource": "${DS_PROMETHEUS}",
+          "heatmap": {},
+          "highlightCards": true,
+          "id": 4,
+          "legend": {
+            "show": false
+          },
+          "links": [],
+          "span": 4,
+          "targets": [
+            {
+              "expr": "counter_status_200_metrics",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            },
+            {
+              "expr": "counter_status_200_prometheus",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "B"
+            },
+            {
+              "expr": "counter_status_200_services",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "C"
+            }
+          ],
+          "title": "totals",
+          "tooltip": {
+            "show": true,
+            "showHistogram": false
+          },
+          "type": "heatmap",
+          "xAxis": {
+            "show": true
+          },
+          "xBucketNumber": null,
+          "xBucketSize": null,
+          "yAxis": {
+            "decimals": null,
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true,
+            "splitFactor": null
+          },
+          "yBucketNumber": null,
+          "yBucketSize": null
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 250,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 1,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "heap",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "refId": "B"
+            },
+            {
+              "expr": "heap_committed",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            },
+            {
+              "expr": "heap_used",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "heap",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 2,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "nonheap",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "refId": "B"
+            },
+            {
+              "expr": "nonheap_committed",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            },
+            {
+              "expr": "nonheap_used",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "noheap",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 250,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 5,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "counter_status_200_services",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            },
+            {
+              "expr": "cxf_services_Attribute_Logical_Runtime_Faults_count",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Panel Title",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 107,
+      "panels": [
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 6,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 6,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "cxf_services_Attribute_Data_Read_count",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "title": "Data Read Count",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 7,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 6,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "cxf_services_Attribute_Data_Written_count",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "title": "Data Write Count",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 110,
+      "panels": [
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 8,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 6,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "cxf_services_Operation_getPeople_Attribute_Data_Read_count",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "title": "Data_Read_count of getPeople Operation",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "#299c46",
+            "rgba(237, 129, 40, 0.89)",
+            "#d44a3a"
+          ],
+          "datasource": "${DS_PROMETHEUS}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 9,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 6,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "expr": "cxf_services_Operation_getPeople_Attribute_Data_Written_count",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "refId": "A"
+            }
+          ],
+          "thresholds": "",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Data Write Count of getPeople Operation",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "avg"
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 250,
+      "panels": [],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    }
+  ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2017-12-15T04:51:36.080Z",
+    "to": "2017-12-15T06:29:18.000Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "example",
+  "version": 6
 }
